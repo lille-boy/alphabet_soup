@@ -1,7 +1,7 @@
 /**************************************************************************************************
  *                                                                         ___    ____
- * Take the str string parameter being passed and return the string       /   |  / __ \
- * with the lettersin alphabetical order (ie. hello becomes ehllo).      / /| | / /_/ /
+ * Take the string parameter being passed and return the string           /   |  / __ \
+ * with the letters in alphabetical order (ie. hello becomes ehllo).     / /| | / /_/ /
  * Assume numbers and punctuation symbols will not be included          / ___ |/ ____/
  * in the string.                                                      /_/  |_/_/
  * Make sorting case-sensitive.
@@ -12,6 +12,9 @@
 #include <string.h>
 #include <stdbool.h>
 #include "alphabet_soup.h"
+
+#define LOWER_CASE_OFFSET (0x20u)
+
 
 /******************************************************************************
  * Swaps two letters
@@ -24,7 +27,8 @@ static void swap(char *a, char *b)
 }
 
 /******************************************************************************
- *
+ * Returns true if the input letter is upper case
+ * Otherwise returns false
  *****************************************************************************/
 static bool upper_case(char letter)
 {
@@ -36,7 +40,7 @@ static bool upper_case(char letter)
 }
 
 /******************************************************************************
- *
+ * Condition to swap two letters
  *****************************************************************************/
 static bool swap_condition(char first_letter, char second_letter)
 {
@@ -48,12 +52,12 @@ static bool swap_condition(char first_letter, char second_letter)
         }
     }
     else if (upper_case(first_letter)) {
-        if ((first_letter + 0x20) > second_letter) {
+        if ((first_letter + LOWER_CASE_OFFSET) > second_letter) {
             condition_ok = true;
         }
     }
     else if (upper_case(second_letter)) {
-        if (first_letter >= (second_letter + 0x20)) {
+        if (first_letter >= (second_letter + LOWER_CASE_OFFSET)) {
             condition_ok = true;
         }
     }
@@ -80,11 +84,11 @@ static void alphabet_sort(char *word, unsigned int size)
 }
 
 /******************************************************************************
- *
+ * Sorts the letters of a input word in alphabetical order
  *****************************************************************************/
 void alphabet_soup(char *word)
 {
-    unsigned int size = strlen(word) - 1;
+    size_t size = sizeof(char) * (strlen(word) - 1);
 
     alphabet_sort(word, size);
     printf("%s\n", word);
