@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "alphabet_soup.h"
+#include "tests.h"
 
 /******************************************************************************
  * Main
@@ -16,7 +17,13 @@
 int main(int argc, char *argv[])
 {
     if (argc > 1) {
-        alphabet_soup(argv[1]);
+        char *command = argv[1];
+        if ((command[0] == '-') && (command[1] == 't')) {
+            tests_all();
+        }
+        else {
+            alphabet_soup(argv[1]);
+        }
     }
     else {
         printf("provide a string\n");

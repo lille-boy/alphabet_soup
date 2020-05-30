@@ -18,6 +18,12 @@ The program uses a recursive function.
 ## Execute
 
 Takes 1 argument of type string.
+
 Example: `./alphabet christmas`
 
 The program returns `achimrsst`
+
+## Tests
+Run tests with command `./alphabet -t`
+
+Returns the number of tests passed, failed and executed.
