@@ -43,9 +43,9 @@ static void test_result(const char *test_name, const char *output, const char *e
 static void test_alphabet(void)
 {
     const char *input = "alphabet";
-	size_t size = strlen(input) + 1;
+    size_t size = strlen(input) + 1;
     char *output = (char*)malloc(size * sizeof(char));
-	memcpy(output, input, size);
+    memcpy(output, input, size);
     alphabet_soup(output);
 
     test_result("test_alphabet", output, "aabehlpt");
@@ -59,9 +59,9 @@ static void test_alphabet(void)
 static void test_Sensitive(void)
 {
     const char *input = "Sensitive";
-	size_t size = strlen(input) + 1;
+    size_t size = strlen(input) + 1;
     char *output = (char*)malloc(size * sizeof(char));
-	memcpy(output, input, size);
+    memcpy(output, input, size);
     alphabet_soup(output);
 
     test_result("test_Sensitive", output, "eeiinSstv");
@@ -75,9 +75,9 @@ static void test_Sensitive(void)
 static void test_encyclopedia(void)
 {
     const char *input = "encyclopedia";
-	size_t size = strlen(input) + 1;
+    size_t size = strlen(input) + 1;
     char *output = (char*)malloc(size * sizeof(char));
-	memcpy(output, input, size);
+    memcpy(output, input, size);
     alphabet_soup(output);
 
     test_result("test_encyclopedia", output, "accdeeilnopy");
@@ -91,9 +91,9 @@ static void test_encyclopedia(void)
 static void test_Windows(void)
 {
     const char *input = "Windows";
-	size_t size = strlen(input) + 1;
+    size_t size = strlen(input) + 1;
     char *output = (char*)malloc(size * sizeof(char));
-	memcpy(output, input, size);
+    memcpy(output, input, size);
     alphabet_soup(output);
 
     test_result("test_Windows", output, "dinosWw");
@@ -107,9 +107,9 @@ static void test_Windows(void)
 static void test_WordReference(void)
 {
     const char *input = "WordReference";
-	size_t size = strlen(input) + 1;
+    size_t size = strlen(input) + 1;
     char *output = (char*)malloc(size * sizeof(char));
-	memcpy(output, input, size);
+    memcpy(output, input, size);
     alphabet_soup(output);
 
     test_result("test_WordReference", output, "cdeeeefnoRrrW");
@@ -123,12 +123,60 @@ static void test_WordReference(void)
 static void test_PROGRAMMING(void)
 {
     const char *input = "PROGRAMMING";
-	size_t size = strlen(input) + 1;
+    size_t size = strlen(input) + 1;
     char *output = (char*)malloc(size * sizeof(char));
-	memcpy(output, input, size);
+    memcpy(output, input, size);
     alphabet_soup(output);
 
     test_result("test_PROGRAMMING", output, "AGGIMMNOPRR");
+
+    free(output);
+}
+
+/******************************************************************************
+ * test
+ *****************************************************************************/
+static void test_you_know_who(void)
+{
+    const char *input = "you-know-who";
+    size_t size = strlen(input) + 1;
+    char *output = (char*)malloc(size * sizeof(char));
+    memcpy(output, input, size);
+    alphabet_soup(output);
+
+    test_result("test_you_know_who", output, "--hknooouwwy");
+
+    free(output);
+}
+
+/******************************************************************************
+ * test
+ *****************************************************************************/
+static void test_AirFrance1(void)
+{
+    const char *input = "AirFrance1";
+    size_t size = strlen(input) + 1;
+    char *output = (char*)malloc(size * sizeof(char));
+    memcpy(output, input, size);
+    alphabet_soup(output);
+
+    test_result("test_AirFrance1", output, "1AaceFinrr");
+
+    free(output);
+}
+
+/******************************************************************************
+ * test
+ *****************************************************************************/
+static void test_TomAndJerry(void)
+{
+    const char *input = "Tom&Jerry";
+    size_t size = strlen(input) + 1;
+    char *output = (char*)malloc(size * sizeof(char));
+    memcpy(output, input, size);
+    alphabet_soup(output);
+
+    test_result("test_TomAndJerry", output, "&eJmorrTy");
 
     free(output);
 }
@@ -139,13 +187,16 @@ static void test_PROGRAMMING(void)
 void tests_all(void)
 {
     test_alphabet();
-	test_Sensitive();
-	test_encyclopedia();
-	test_Windows();
-	test_WordReference();
-	test_PROGRAMMING();
+    test_Sensitive();
+    test_encyclopedia();
+    test_Windows();
+    test_WordReference();
+    test_PROGRAMMING();
+    test_you_know_who();
+    test_AirFrance1();
+    test_TomAndJerry();
 
     printf("Tests Passed:   %d\n", pass);
-	printf("Tests Failed:   %d\n", fail);
-	printf("Tests Executed: %d\n", executed);
+    printf("Tests Failed:   %d\n", fail);
+    printf("Tests Executed: %d\n", executed);
 }
