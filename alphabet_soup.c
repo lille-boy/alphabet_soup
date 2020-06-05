@@ -11,85 +11,52 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <ctype.h>
 #include "alphabet_soup.h"
 
-#define LOWER_CASE_OFFSET (0x20u)
-
 
 /******************************************************************************
- * Swaps two letters
+ * Comparison function for ignored case sorting
  *****************************************************************************/
-static void swap(char *a, char *b)
+static int compare_ignore_case(const void *first_letter, const void *second_letter)
 {
-    char c = *a;
-    *a = *b;
-    *b = c;
+    char c1 = *(char *)first_letter;
+    char c2 = *(char *)second_letter;
+    char u1 = toupper(c1);
+    char u2 = toupper(c2);
+
+    return (u1 > u2) - (u1 < u2);
 }
 
 /******************************************************************************
- * Returns true if the input letter is upper case
- * Otherwise returns false
+ * Comparison function for case independent sorting
  *****************************************************************************/
-static bool upper_case(char letter)
+static int compare_case_independent(const void *first_letter, const void *second_letter)
 {
-    if (letter >= 'A' && letter <= 'Z') {
-        return true;
+    char c1 = *(char *)first_letter;
+    char c2 = *(char *)second_letter;
+    char u1 = toupper(c1);
+    char u2 = toupper(c2);
+
+    if (u1 != u2) {
+        return (u1 > u2) - (u1 < u2);
     }
 
-    return false;
-}
-
-/******************************************************************************
- * Condition to swap two letters
- *****************************************************************************/
-static bool swap_condition(char first_letter, char second_letter)
-{
-    bool condition_ok = false;
-
-    if (upper_case(first_letter) && upper_case(second_letter)) {
-        if (first_letter > second_letter) {
-            condition_ok = true;
-        }
-    }
-    else if (upper_case(first_letter)) {
-        if ((first_letter + LOWER_CASE_OFFSET) > second_letter) {
-            condition_ok = true;
-        }
-    }
-    else if (upper_case(second_letter)) {
-        if (first_letter >= (second_letter + LOWER_CASE_OFFSET)) {
-            condition_ok = true;
-        }
-    }
-    else {
-        if (first_letter > second_letter) {
-            condition_ok = true;
-        }
-    }
-
-    return(condition_ok);
-}
-
-/******************************************************************************
- * Sorts the input word recursively
- *****************************************************************************/
-static void alphabet_sort(char *word, unsigned int size)
-{
-    for (unsigned int i = 0; i < size; i++) {
-        if (swap_condition(word[i], word[i+1])) {
-            swap(&word[i], &word[i+1]);
-            alphabet_sort(&word[0], i + 1);
-        }
-    }
+    return (c1 > c2) - (c1 < c2);
 }
 
 /******************************************************************************
  * Sorts the letters of a input word in alphabetical order
  *****************************************************************************/
-void alphabet_soup(char *word)
+void alphabet_soup(char *word, char *option)
 {
-    size_t size = sizeof(char) * (strlen(word) - 1);
-
-    alphabet_sort(word, size);
-    printf("%s\n", word);
+    if (strcmp(option, IGNORE_CASE) == 0) {
+        qsort(word, strlen(word), sizeof(char), compare_ignore_case);
+    }
+    else if (strcmp(option, DEFAULT) == 0) {
+        qsort(word, strlen(word), sizeof(char), compare_case_independent);
+    }
+    else {
+        printf("Unknown option\n");
+    }
 }

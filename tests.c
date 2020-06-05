@@ -30,7 +30,7 @@ static void test_result(const char *test_name, const char *output, const char *e
 	else {
 		fail++;
 		if(DEBUG >= 1) {
-			printf("%s: fail - ", test_name);
+			printf("%s: fail\n", test_name);
 		}
 	}
 
@@ -46,7 +46,7 @@ static void test_alphabet(void)
     size_t size = strlen(input) + 1;
     char *output = (char*)malloc(size * sizeof(char));
     memcpy(output, input, size);
-    alphabet_soup(output);
+    alphabet_soup(output, DEFAULT);
 
     test_result("test_alphabet", output, "aabehlpt");
 
@@ -62,7 +62,7 @@ static void test_Sensitive(void)
     size_t size = strlen(input) + 1;
     char *output = (char*)malloc(size * sizeof(char));
     memcpy(output, input, size);
-    alphabet_soup(output);
+    alphabet_soup(output, DEFAULT);
 
     test_result("test_Sensitive", output, "eeiinSstv");
 
@@ -78,7 +78,7 @@ static void test_encyclopedia(void)
     size_t size = strlen(input) + 1;
     char *output = (char*)malloc(size * sizeof(char));
     memcpy(output, input, size);
-    alphabet_soup(output);
+    alphabet_soup(output, DEFAULT);
 
     test_result("test_encyclopedia", output, "accdeeilnopy");
 
@@ -94,7 +94,7 @@ static void test_Windows(void)
     size_t size = strlen(input) + 1;
     char *output = (char*)malloc(size * sizeof(char));
     memcpy(output, input, size);
-    alphabet_soup(output);
+    alphabet_soup(output, DEFAULT);
 
     test_result("test_Windows", output, "dinosWw");
 
@@ -110,7 +110,7 @@ static void test_WordReference(void)
     size_t size = strlen(input) + 1;
     char *output = (char*)malloc(size * sizeof(char));
     memcpy(output, input, size);
-    alphabet_soup(output);
+    alphabet_soup(output, DEFAULT);
 
     test_result("test_WordReference", output, "cdeeeefnoRrrW");
 
@@ -126,7 +126,7 @@ static void test_PROGRAMMING(void)
     size_t size = strlen(input) + 1;
     char *output = (char*)malloc(size * sizeof(char));
     memcpy(output, input, size);
-    alphabet_soup(output);
+    alphabet_soup(output, DEFAULT);
 
     test_result("test_PROGRAMMING", output, "AGGIMMNOPRR");
 
@@ -142,7 +142,7 @@ static void test_you_know_who(void)
     size_t size = strlen(input) + 1;
     char *output = (char*)malloc(size * sizeof(char));
     memcpy(output, input, size);
-    alphabet_soup(output);
+    alphabet_soup(output, DEFAULT);
 
     test_result("test_you_know_who", output, "--hknooouwwy");
 
@@ -158,7 +158,7 @@ static void test_AirFrance1(void)
     size_t size = strlen(input) + 1;
     char *output = (char*)malloc(size * sizeof(char));
     memcpy(output, input, size);
-    alphabet_soup(output);
+    alphabet_soup(output, DEFAULT);
 
     test_result("test_AirFrance1", output, "1AaceFinrr");
 
@@ -174,9 +174,22 @@ static void test_TomAndJerry(void)
     size_t size = strlen(input) + 1;
     char *output = (char*)malloc(size * sizeof(char));
     memcpy(output, input, size);
-    alphabet_soup(output);
+    alphabet_soup(output, DEFAULT);
 
     test_result("test_TomAndJerry", output, "&eJmorrTy");
+
+    free(output);
+}
+
+static void test_long_string(void){
+
+    const char *input = "PvpxixCDvgnkLHQLlBvsJzgQLDmBxUeIhyUMvDiVpjCYvOshnaEvupb";
+    size_t size = strlen(input) + 1;
+    char *output = (char*)malloc(size * sizeof(char));
+    memcpy(output, input, size);
+    alphabet_soup(output, DEFAULT);
+
+    test_result("test_long_string", output, "aBBbCCDDDEeggHhhIiiJjkLLLlMmnnOPpppQQssUUuVvvvvvvxxxYyz");
 
     free(output);
 }
@@ -195,6 +208,7 @@ void tests_all(void)
     test_you_know_who();
     test_AirFrance1();
     test_TomAndJerry();
+    test_long_string();
 
     printf("Tests Passed:   %d\n", pass);
     printf("Tests Failed:   %d\n", fail);

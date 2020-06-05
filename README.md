@@ -5,7 +5,7 @@ Sorts the letters of a string in alphabetical order
 Take the string parameter being passed and return the string with the letters in alphabetical order (i.e. `hello` becomes `ehllo`).
 
 Assume numbers and punctuation symbols will not be included in the string.
-Make sorting case-sensitive. For example `Sensitive` becomes `eeiinSstv`.
+Make sorting case-independent. For example `Sensitive` becomes `eeiinSstv`.
 
 # Solution
 The program uses a recursive function.
@@ -17,13 +17,19 @@ The program uses a recursive function.
 
 ## Execute
 
-Takes 1 argument of type string.
+### Options
 
-Example: `./alphabet christmas`
-
-The program returns `achimrsst`
-
-## Tests
-Run tests with command `./alphabet -t`
+#### Option -t
+Runs the tests: `./alphabet -t`
 
 Returns the number of tests passed, failed and executed.
+
+#### Option -f
+Ignores case: `./alphabet -f cbaBAC`
+
+Returns `aAbBcC`
+
+#### No option
+By default, case-independent sorting: `./alphabet cbaBAC`
+
+Returns `AaBbCc`

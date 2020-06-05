@@ -10,6 +10,11 @@
 #ifndef ALPHABET_SOUP_H
 #define ALPHABET_SOUP_H
 
+/* Options */
+#define TEST "-t"
+#define DEFAULT ""
+#define IGNORE_CASE "-f"
+
 /******************************************************************************
  * Description:
  * - sorts the letters of a input word in alphabetical order.
@@ -18,6 +23,6 @@
  * Return value:
  * - none, the function prints out the result
  *****************************************************************************/
-void alphabet_soup(char *word);
+void alphabet_soup(char *word, char *option);
 
 #endif /* ALPHABET_SOUP_H */
