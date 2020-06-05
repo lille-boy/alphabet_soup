@@ -8,7 +8,7 @@ Assume numbers and punctuation symbols will not be included in the string.
 Make sorting case-independent. For example `Sensitive` becomes `eeiinSstv`.
 
 # Solution
-The program uses a recursive function.
+The program uses qsort.
 
 # Usage
 ## Build
