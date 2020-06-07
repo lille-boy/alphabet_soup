@@ -1,3 +1,5 @@
+![](https://github.com/lille-boy/alphabet_soup/workflows/alphaci/badge.svg)
+
 # Goal
 Sorts the letters of a string in alphabetical order
 
