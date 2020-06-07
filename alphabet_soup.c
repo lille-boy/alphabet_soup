@@ -16,16 +16,26 @@
 
 
 /******************************************************************************
- * Comparison function for ignored case sorting
+ * Swaps two letters
  *****************************************************************************/
-static int compare_ignore_case(const void *first_letter, const void *second_letter)
+static void swap(char *a, char *b)
 {
-    char c1 = *(char *)first_letter;
-    char c2 = *(char *)second_letter;
-    char u1 = toupper(c1);
-    char u2 = toupper(c2);
+    char c = *a;
+    *a = *b;
+    *b = c;
+}
 
-    return (u1 > u2) - (u1 < u2);
+/******************************************************************************
+ * Sorts the input word recursively
+ *****************************************************************************/
+static void alphabet_sort(char *word, unsigned int size)
+{
+    for (unsigned int i = 0; i < size; i++) {
+        if (word[i] > word[i + 1]) {
+            swap(&word[i], &word[i+1]);
+            alphabet_sort(&word[0], i + 1);
+        }
+    }
 }
 
 /******************************************************************************
@@ -51,7 +61,8 @@ static int compare_case_independent(const void *first_letter, const void *second
 void alphabet_soup(char *word, char *option)
 {
     if (strcmp(option, IGNORE_CASE) == 0) {
-        qsort(word, strlen(word), sizeof(char), compare_ignore_case);
+        unsigned int size = strlen(word) - 1;
+        alphabet_sort(word, size);
     }
     else if (strcmp(option, DEFAULT) == 0) {
         qsort(word, strlen(word), sizeof(char), compare_case_independent);

@@ -19,9 +19,11 @@
  * Description:
  * - sorts the letters of a input word in alphabetical order.
  * Parameter:
- * - word: one word with no space
- * Return value:
- * - none, the function prints out the result
+ * - word: one word without space character
+ * - option: DEFAULT does case-independent sorting, IGNORE_CASE sorts in
+ * ascending ASCII values
+ * Return:
+ * - variable word contains the sorted string
  *****************************************************************************/
 void alphabet_soup(char *word, char *option);
 
