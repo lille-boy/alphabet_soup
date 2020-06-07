@@ -25,9 +25,9 @@ Runs the tests: `./alphabet -t`
 Returns the number of tests passed, failed and executed.
 
 #### Option -f
-Ignores case: `./alphabet -f cbaBAC`
+Ignores casing (sorts in ascending ASCII values): `./alphabet -f cbaBAC`
 
-Returns `aAbBcC`
+Returns `ABCabc`
 
 #### No option
 By default, case-independent sorting: `./alphabet cbaBAC`

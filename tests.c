@@ -30,7 +30,7 @@ static void test_result(const char *test_name, const char *output, const char *e
 	else {
 		fail++;
 		if(DEBUG >= 1) {
-			printf("%s: fail\n", test_name);
+			printf("%s: fail - %s\n", test_name, output);
 		}
 	}
 
@@ -181,8 +181,11 @@ static void test_TomAndJerry(void)
     free(output);
 }
 
-static void test_long_string(void){
-
+/******************************************************************************
+ * test
+ *****************************************************************************/
+static void test_long_string(void)
+{
     const char *input = "PvpxixCDvgnkLHQLlBvsJzgQLDmBxUeIhyUMvDiVpjCYvOshnaEvupb";
     size_t size = strlen(input) + 1;
     char *output = (char*)malloc(size * sizeof(char));
@@ -195,10 +198,75 @@ static void test_long_string(void){
 }
 
 /******************************************************************************
+ * test
+ *****************************************************************************/
+static void test_cbaBAC(void)
+{
+    const char *input = "cbaBAC";
+    size_t size = strlen(input) + 1;
+    char *output = (char*)malloc(size * sizeof(char));
+    memcpy(output, input, size);
+    alphabet_soup(output, IGNORE_CASE);
+
+    test_result("test_cbaBAC", output, "ABCabc");
+
+    free(output);
+}
+
+/******************************************************************************
+ * test
+ *****************************************************************************/
+static void test_Casing(void)
+{
+    const char *input = "Casing";
+    size_t size = strlen(input) + 1;
+    char *output = (char*)malloc(size * sizeof(char));
+    memcpy(output, input, size);
+    alphabet_soup(output, IGNORE_CASE);
+
+    test_result("test_Casing", output, "Cagins");
+
+    free(output);
+}
+
+/******************************************************************************
+ * test
+ *****************************************************************************/
+static void test_ILoveParis(void)
+{
+    const char *input = "ILoveParis";
+    size_t size = strlen(input) + 1;
+    char *output = (char*)malloc(size * sizeof(char));
+    memcpy(output, input, size);
+    alphabet_soup(output, IGNORE_CASE);
+
+    test_result("test_ILoveParis", output, "ILPaeiorsv");
+
+    free(output);
+}
+
+/******************************************************************************
+ * test
+ *****************************************************************************/
+static void test_longer_string(void)
+{
+    const char *input = "RvpxiCDgnkLHQlBsJzgQLmBxUeSIhyUMvADiVjCYOshnaEvub";
+    size_t size = strlen(input) + 1;
+    char *output = (char*)malloc(size * sizeof(char));
+    memcpy(output, input, size);
+    alphabet_soup(output, IGNORE_CASE);
+
+    test_result("test_longer_string", output, "ABBCCDDEHIJLLMOQQRSUUVYabegghhiijklmnnpssuvvvxxyz");
+
+    free(output);
+}
+
+/******************************************************************************
  * Run all tests and display the results
  *****************************************************************************/
 void tests_all(void)
 {
+    /* DEFAULT option */
     test_alphabet();
     test_Sensitive();
     test_encyclopedia();
@@ -209,6 +277,11 @@ void tests_all(void)
     test_AirFrance1();
     test_TomAndJerry();
     test_long_string();
+    /* IGNORE_CASE option*/
+    test_cbaBAC();
+    test_Casing();
+    test_ILoveParis();
+    test_longer_string();
 
     printf("Tests Passed:   %d\n", pass);
     printf("Tests Failed:   %d\n", fail);
