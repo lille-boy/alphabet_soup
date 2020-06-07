@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -I.
+CFLAGS = -Wall -Wextra -Werror -I.
 DEPS = alphabet_soup.h tests.h
 OBJ = main.o alphabet_soup.o tests.o
 
@@ -8,3 +8,6 @@ OBJ = main.o alphabet_soup.o tests.o
 
 alphabet: $(OBJ)
 	$(CC) -o  $@ $^ $(CFLAGS)
+
+clean:
+	rm *.o
